@@ -21,7 +21,9 @@
     vertical-align: middle;
     > .g-button{
       border-radius: 0;
-      margin-left: -1px;//实现合并相交线
+      &:not(:first-child){
+        margin-left: -1px;//实现合并相交线
+      }
       &:first-child {//实现两个按钮两边添加弧度
         border-top-left-radius: var(--border-radius);
         border-bottom-left-radius: var(--border-radius);
