@@ -20,6 +20,10 @@ new Vue({
 
 //引入chai
 import chai from 'chai'
+import spies from 'chai-spies'
+//使用spies
+chai.use(spies)
+
 const expect = chai.expect
 //单元测试
 //断言
@@ -39,6 +43,7 @@ const expect = chai.expect
     let href = useElement.getAttribute('xlink:href')
     //主观期待xlink:href = #i-settings
     expect(href).to.eq('#i-settings')
+    //如果成功了，就把vm元素、对象删掉
     vm.$el.remove()
     vm.$destroy()
 }
@@ -75,7 +80,6 @@ const expect = chai.expect
     let svg = vm.$el.querySelector('svg')
     let {order} = window.getComputedStyle(svg)
     expect(order).to.eq('1')
-    //如果成功了，就把button元素、对象删掉
     vm.$el.remove()
     vm.$destroy()
 }
@@ -107,12 +111,14 @@ const expect = chai.expect
         }
     })
     vm.$mount()
-    vm.$on('click',function (){
-        console.log(1)
-    })
-    let svg = vm.$el.querySelector('svg')
-    let {order} = window.getComputedStyle(svg)
-    expect(order).to.eq('2')
-    vm.$el.remove()
-    vm.$destroy()
+    //间谍函数
+    let spy = chai.spy(function (){})
+    //on click 触发 spy
+    vm.$on('click',spy)
+    //希望这个函数被执行
+    let button = vm.$el
+    //点击button click执行监听之后
+    button.click()
+    //spy已经被调用了
+    expect(spy).to.have.been.called()
 }
