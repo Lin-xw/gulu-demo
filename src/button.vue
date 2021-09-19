@@ -9,7 +9,12 @@
   </button>
 </template>
 <script>
+import Icon from './icon'
 export default {
+  //局部组件
+  components:{
+    'g-icon':Icon
+  },
   props: {
     icon: {},
     loading:{

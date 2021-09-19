@@ -3,15 +3,15 @@
 import Vue from "vue";
 import Button from './button'
 import Icon from './icon'
-import ButtonGroup from  './button-group'
+import ButtonGroup from './button-group'
 //声明
-Vue.component('g-button',Button)
+Vue.component('g-button', Button)
 Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
 
 new Vue({
     el: '#app',
-    data:{
+    data: {
         loading1: false,
         loading2: false,
         loading3: false,
@@ -48,77 +48,88 @@ const expect = chai.expect
     vm.$destroy()
 }
 //如果设置和检查的结果都满足预期，那么代码就没问题
-{
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-        propsData: {
-            icon: 'settings',
-            loading: true
-        }
-    })
-    vm.$mount()
-    let useElement = vm.$el.querySelector('use')
-    let href = useElement.getAttribute('xlink:href')
-    expect(href).to.eq('#i-loading')
-    vm.$el.remove()
-    vm.$destroy()
-}
+try {
 
-{
-    //创建div
-    const div = document.createElement('div')
-    //把div放到body里面
-    document.body.appendChild(div)
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-        propsData: {
-            icon: 'settings'
-        }
-    })
-    //把div挂在页面里面
-    vm.$mount(div)
-    let svg = vm.$el.querySelector('svg')
-    let {order} = window.getComputedStyle(svg)
-    expect(order).to.eq('1')
-    vm.$el.remove()
-    vm.$destroy()
-}
+      {
+        const Constructor = Vue.extend(Button)
+        const vm = new Constructor({
+            propsData: {
+                icon: 'settings',
+                loading: true
+            }
+        })
+        vm.$mount()
+        let useElement = vm.$el.querySelector('use')
+        let href = useElement.getAttribute('xlink:href')
+        expect(href).to.eq('#i-loading')
+        vm.$el.remove()
+        vm.$destroy()
+      }
 
-{
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-        propsData: {
-            icon: 'settings',
-            iconPosition: 'right'
-        }
-    })
-    vm.$mount(div)
-    let svg = vm.$el.querySelector('svg')
-    let {order} = window.getComputedStyle(svg)
-    expect(order).to.eq('2')
-    vm.$el.remove()
-    vm.$destroy()
-}
+      {
+        //创建div
+        const div = document.createElement('div')
+        //把div放到body里面
+        document.body.appendChild(div)
+        const Constructor = Vue.extend(Button)
+        const vm = new Constructor({
+            propsData: {
+                icon: 'settings'
+            }
+        })
+        //把div挂在页面里面
+        vm.$mount(div)
+        let svg = vm.$el.querySelector('svg')
+        let {order} = window.getComputedStyle(svg)
+        expect(order).to.eq('1')
+        vm.$el.remove()
+        vm.$destroy()
+      }
 
-{
-    //mock
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-        propsData: {
-            icon: 'settings',
-        }
+      {
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        const Constructor = Vue.extend(Button)
+        const vm = new Constructor({
+            propsData: {
+                icon: 'settings',
+                iconPosition: 'right'
+            }
+        })
+        vm.$mount(div)
+        let svg = vm.$el.querySelector('svg')
+        let {order} = window.getComputedStyle(svg)
+        expect(order).to.eq('2')
+        vm.$el.remove()
+        vm.$destroy()
+      }
+
+      {
+        //mock
+        const Constructor = Vue.extend(Button)
+        const vm = new Constructor({
+            propsData: {
+                icon: 'settings',
+            }
+        })
+        vm.$mount()
+        //间谍函数
+        let spy = chai.spy(function () {
+        })
+        //on click 触发 spy
+        vm.$on('click', spy)
+        //希望这个函数被执行
+        let button = vm.$el
+        //点击button click执行监听之后
+        button.click()
+        //spy已经被调用了
+        expect(spy).to.have.been.called()
+        //使用 chai.spy 监听回调函数
+      }
+  } catch (error) {
+    window.errors = [error]
+  } finally {
+    window.errors && window.errors.forEach((error) => {
+        console.error(error.message)
     })
-    vm.$mount()
-    //间谍函数
-    let spy = chai.spy(function (){})
-    //on click 触发 spy
-    vm.$on('click',spy)
-    //希望这个函数被执行
-    let button = vm.$el
-    //点击button click执行监听之后
-    button.click()
-    //spy已经被调用了
-    expect(spy).to.have.been.called()
 }
