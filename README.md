@@ -43,7 +43,10 @@
     }
   }
   ```
-
+4.导入iconFont
+  ```angular2html
+  <script src="//at.alicdn.com/t/font_2818227_2yj6px4c9qd.js"></script>
+  ```
 ##文档
 
 ##提问
