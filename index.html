@@ -44,6 +44,8 @@
     <g-input value="禁止" disabled></g-input>
     <g-input value="只读" readonly></g-input>
     <g-input value="请输入"></g-input>
+    <g-input value="请输入" v-model="message"></g-input>
+        <p>{{message}}</p>
     </div>
     <div class="box">
         <g-input value="好" @change="inputChange"></g-input>

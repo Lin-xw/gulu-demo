@@ -78,6 +78,7 @@ describe('Input', () => {
                     //触发input的change 事件
                     let event = new Event(eventName);
                     Object.defineProperty(
+                        //由于要兼容v-model，所以需要这样写
                         event, 'target', {
                             value: {value: 'hi'}, enumerable: true
                         }
