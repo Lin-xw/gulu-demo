@@ -22,6 +22,8 @@ new Vue({
         loading3: false,
         message:'hi'
     },
+    created() {
+    },
     methods:{
         inputChange(e){
           console.log(e.target.value)
