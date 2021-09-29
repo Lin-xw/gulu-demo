@@ -42,10 +42,10 @@ export default {
         span && `col-${span}`,
         offset && `offset-${offset}`,
         //如果有***就传col-***-$-{***.span}
-        ...(ipad && [`col-ipad-$-{ipad.span}`]),
-        ...(narrowPc && [`col-narrowPc-$-{narrowPc.span}`]),
-        ...(pc && [`col-pc-$-{pc.span}`]),
-        ...(widePc && [`col-widePc-$-{widePc.span}`]),
+        ...(ipad ? [`col-ipad-$-{ipad.span}`]:[]),
+        ...(narrowPc ? [`col-narrowPc-$-{narrowPc.span}`]:[]),
+        ...(pc ? [`col-pc-$-{pc.span}`]:[]),
+        ...(widePc ? [`col-widePc-$-{widePc.span}`]:[]),
       ]
       //把传给js的东西体现在标签上面，方可用css切换
     },
@@ -63,7 +63,7 @@ export default {
   $class-prefix: col-;
   @for $n from 1 through 24 {
     &.#{$class-prefix}#{$n} {
-      width: ($n / 24) * 100%;
+      width:($n / 24) * 100%;
     }
   }
   $class-prefix: offset-;
@@ -73,7 +73,7 @@ export default {
     }
   }
   //ipad屏幕
-  @media (min-width: 577px) and (max-width: 768px) {
+  @media (min-width: 577px) {
     $class-prefix: col-ipad-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
@@ -88,7 +88,7 @@ export default {
     }
   }
   //窄屏幕
-  @media (min-width: 769px) and (max-width: 992px) {
+  @media (min-width: 769px) {
     $class-prefix: col-narrow-pc-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
@@ -103,7 +103,7 @@ export default {
     }
   }
   //电脑屏幕
-  @media (min-width: 993px) and (max-width: 1200px) {
+  @media (min-width: 993px){
     $class-prefix: col-pc-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
