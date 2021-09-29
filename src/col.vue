@@ -34,18 +34,27 @@ export default {
         gutter: 0
       }
     },
+  methods:{
+    createClasses(obj, str = ''){//产生数组
+      if(!obj){return []}
+      let array = []
+      //这个对象如果有span就要给一个col-${}
+      if(obj.span){array.push(`col-${str}${obj.span}`)}
+      if(obj.offset){array.push(`offset-${str}${obj.offset}`)}
+      return array
+    }
+  },
   computed: {
     colClass() {
       let {span, offset, ipad,narrowPc,pc,widePc} = this
-      let phoneClass = [] //默认为空
+      let createClasses = this.createClasses
       return [
-        span && `col-${span}`,
-        offset && `offset-${offset}`,
-        //如果有***就传col-***-$-{***.span}
-        ...(ipad ? [`col-ipad-$-{ipad.span}`]:[]),
-        ...(narrowPc ? [`col-narrowPc-$-{narrowPc.span}`]:[]),
-        ...(pc ? [`col-pc-$-{pc.span}`]:[]),
-        ...(widePc ? [`col-widePc-$-{widePc.span}`]:[]),
+        ...createClasses({span,offset}),
+        //如果有***就传col-{str}${obj.span}
+        ...createClasses(ipad,'ipad-'),
+        ...createClasses(narrowPc,'narrowPc-'),
+        ...createClasses(pc,'pc-'),
+        ...createClasses(widePc,'widePc-'),
       ]
       //把传给js的东西体现在标签上面，方可用css切换
     },
