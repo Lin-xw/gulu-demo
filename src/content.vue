@@ -3,8 +3,13 @@
     <slot></slot>
   </div>
 </template>
+<script>
+  export default {
+    name:'GuluSider'
+  }
+</script>
 <style lang="scss" scoped>
 .content{
-
+  flex-grow: 1;
 }
 </style>
