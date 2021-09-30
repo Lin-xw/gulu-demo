@@ -29,9 +29,17 @@
         }
     </style>
     <style>
-        .demo {
-            border: 1px solid #666;
-            min-height: 100px;
+        .sider{
+            background: #333;
+            width: 200px;
+        }
+        .header{
+            background: #999;
+            height: 100px;
+        }
+        .footer{
+            background: #ccc;
+            height: 50px;
         }
     </style>
 </head>
@@ -39,12 +47,12 @@
 
 <div id="app">
     <g-layout style="height: 100vh">
-        <g-header class="demo">h</g-header>
+        <g-header>h</g-header>
         <g-layout>
-            <g-sider class="demo">s</g-sider>
-            <g-content class="demo">c</g-content>
+            <g-sider>s</g-sider>
+            <g-content>c</g-content>
+            <g-footer>f</g-footer>
         </g-layout>
-        <g-footer class="demo">f</g-footer>
     </g-layout>
 </div>
 <script src="./src/app.js"></script>
