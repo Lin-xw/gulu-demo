@@ -1,7 +1,10 @@
 <template>
-  <div class="toast">
-    <slot></slot>
-    <div class="line"></div>
+  <div class="toast" ref="toast">
+    <div class="message">
+      <slot v-if="!enableHtml"></slot>
+      <div v-else v-html="$slots.default[0]"></div>
+    </div>
+    <div class="line" ref="line"></div>
     <span class="close" v-if="closeButton" @click="onClickClose">
       {{closeButton.text}}
     </span>
@@ -19,17 +22,34 @@ export default {
       default: () => {
         return {text: '关闭', callback: undefined}
       }
+    },
+    enableHtml:{//默认关闭,支持html
+      type:Boolean,
+      default:false
     }
   },
   //使用
-  mounted() {//默认true，自动关闭
-    if (this.autoClose) {
-      setTimeout(() => {//5秒钟之后结束
-        this.close()
-      }, this.autoCloseDelay * 1000)
-    }
+  mounted() {
+    this.updateStyles()
+    this.execAutoClose()
   },
-  methods: {//实现关闭
+  methods: {
+    //使用js方法实现竖线分割,解决css的高度问题
+    updateStyles(){
+      this.$nextTick(()=> {
+        this.$refs.line.style.height =
+            `${this.$refs.toast.getBoundingClientRect().height}px`
+      })
+    },
+    //默认true，自动关闭
+    execAutoClose(){
+      if (this.autoClose) {
+        setTimeout(() => {//5秒钟之后结束
+          this.close()
+        }, this.autoCloseDelay * 1000)
+      }
+    },
+    //实现关闭
     close() {
       //把元素从body里拿出来
       this.$el.remove()
@@ -48,12 +68,28 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$font-size: 14px;  $toast-height: 40px;  $toast-bg: rgba(0, 0, 0, 0.75);
-.toast {font-size: $font-size;height: $toast-height;line-height: 1.8;
-  position: fixed;top: 0;color: #eeeeee;left: 50%;transition: transLateX(-50%);
-  display: flex;align-items: center;background: $toast-bg;border-radius: 4px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50);padding: 0 16px;
-}
-.close{padding-left: 16px;}
-.line{height: 100%;border-left: 1px solid #666;margin-left: 16px;}
+  $font-size: 14px;
+  $toast-min-height: 40px;
+  $toast-bg: rgba(0, 0, 0, 0.75);
+  .toast {
+    font-size: $font-size;
+    min-height: $toast-min-height;
+    line-height: 1.8;
+    position: fixed;
+    top: 0;
+    color: #eeeeee;
+    left: 50%;
+    transform: transLateX(-50%);
+    display: flex;
+    align-items: center;
+    background: $toast-bg;
+    border-radius: 4px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50);
+    padding: 0 16px;
+  }
+  .message{
+    padding: 8px 0;
+  }
+  .close{padding-left: 16px; flex-shrink: 0}
+  .line{height: 100%;border-left: 1px solid #666;margin-left: 16px;}
 </style>

@@ -37,13 +37,9 @@ new Vue({
         message: 'hi'
     },
     created() {
-        this.$toast('我是 message', {
-            closeButton: {
-                text: '知道了',
-                callback() {
-                    console.log('用户说他知道了')
-                }
-            }
+        this.$toast('<strong>段落</strong>',{
+            enableHtml: false
+            //支持html启动开关
         })
     },
     methods: {
