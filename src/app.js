@@ -29,32 +29,33 @@ Vue.component('g-sider', Sider)
 Vue.component('g-toast', Toast)
 Vue.use(plugin)
 new Vue({
-    el: '#app',
-    data: {
-        loading1: false,
-        loading2: false,
-        loading3: false,
-        message: 'hi'
-    },
-    created() {
-        this.$toast('你的账号需要充值',{
-            //改变弹出位置  上中下
-            position:'bottom',
-            enableHtml: false,
-            //支持html启动开关
-            closeButton:{
-                text:'已充值',
-                callback(){
-                    console.log('他说已经充值账号了')
-                }
-        },
-            autoClose:true,
-            autoCloseDelay: 10
-        })
-    },
-    methods: {
-        showToast() {
-        }
+  el: '#app',
+  data: {
+    loading1: false,
+    loading2: false,
+    loading3: false,
+    message: 'hi'
+  },
+  created() {//出生
 
+  },
+  methods: {
+    showToast() {
+      this.$toast('你的账号需要充值', {
+        //改变弹出位置  上中下
+        position: 'bottom',
+        enableHtml: false,
+        //支持html启动开关
+        closeButton: {
+          text: '已充值',
+          callback() {
+            console.log('他说已经充值账号了')
+          }
+        },
+        autoClose: true,
+        autoCloseDelay: 10
+      })
     }
+
+  }
 })
