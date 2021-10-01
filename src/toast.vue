@@ -66,8 +66,10 @@ export default {
     close() {
       //把元素从body里拿出来
       this.$el.remove()
+      this.$emit('close')
       this.$destroy()
       //会把绑定的事件取消掉
+
     },
     onClickClose(){//如果用户点击关闭
       this.close()//把自己先关闭

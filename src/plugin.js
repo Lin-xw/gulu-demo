@@ -10,17 +10,26 @@ export default {
       if (currentToast) {
         currentToast.close()
       }
-      currentToast = createToast({Vue, message, propsData: toastOptions}) //新建-提取函数,es6语法
+      currentToast = createToast({
+        Vue,
+        message,
+        propsData: toastOptions,
+        onClose:()=>{
+          //如果关闭了
+          currentToast = null
+        }
+      }) //新建-提取函数,es6语法
     }
   }
 }
 
 /* helpers */
-function createToast ({Vue, message, propsData}) {
+function createToast ({Vue, message, propsData,onClose}) {
   let Constructor = Vue.extend(Toast)
   let toast = new Constructor({propsData})
   toast.$slots.default = [message]
   toast.$mount()
+  toast.$on('close',onClose)//监听，如果toast被close就调用onClose
   document.body.appendChild(toast.$el)
   return toast
 }
