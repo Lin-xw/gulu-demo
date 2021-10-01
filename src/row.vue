@@ -13,7 +13,7 @@ export default {
     align: {//排列对齐验证
       type: String,
       validator(value) {
-        return ['left', 'right', 'center'].includes(value);
+        return ['left', 'right', 'center'].indexOf(value) >= 0;
       }
     }
 

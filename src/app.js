@@ -37,9 +37,15 @@ new Vue({
         message: 'hi'
     },
     created() {
-        this.$toast('<strong>段落</strong>',{
-            enableHtml: false
+        this.$toast('',{
+            enableHtml: false,
             //支持html启动开关
+            closeButton:{
+                text:'已充值',
+                callback(){
+
+                }
+        },
         })
     },
     methods: {
