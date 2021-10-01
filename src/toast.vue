@@ -6,7 +6,7 @@
     </div>
     <div class="line" ref="line"></div>
     <span class="close" v-if="closeButton" @click="onClickClose">
-      {{ closeButton.text }}
+      {{closeButton.text}}
     </span>
   </div>
 </template>
@@ -23,15 +23,15 @@ export default {
         return {text: '关闭', callback: undefined}
       }
     },
-    enableHtml: {//默认关闭,支持html
-      type: Boolean,
-      default: false
+    enableHtml:{//默认关闭,支持html
+      type:Boolean,
+      default:false
     },
-    position: {//实现弹窗位置 上中下
+    position:{//实现弹窗位置 上中下
       type: String,
       default: 'top',
-      validator(value) {
-        return ['top', 'bottom', 'middle'].indexOf(value) >= 0
+      validator(value){
+        return ['top','bottom','middle'].indexOf(value) >= 0
       }
     }
   },
@@ -41,21 +41,21 @@ export default {
     this.execAutoClose()
   },
   //计算属性
-  computed: {
-    toastClasses() {
+  computed:{
+    toastClasses(){
       return {[`position-${this.position}`]: true}
     }
   },
   methods: {
     //使用js方法实现竖线分割,解决css的高度问题
-    updateStyles() {
-      this.$nextTick(() => {
+    updateStyles(){
+      this.$nextTick(()=> {
         this.$refs.line.style.height =
             `${this.$refs.toast.getBoundingClientRect().height}px`
       })
     },
     //默认true，自动关闭
-    execAutoClose() {
+    execAutoClose(){
       if (this.autoClose) {
         setTimeout(() => {//5秒钟之后结束
           this.close()
@@ -69,10 +69,10 @@ export default {
       this.$destroy()
       //会把绑定的事件取消掉
     },
-    onClickClose() {//如果用户点击关闭
+    onClickClose(){//如果用户点击关闭
       this.close()//把自己先关闭
       //如果有this.closeButton 而且有.callback，而且callback是function就执行内容
-      if (this.closeButton && typeof this.closeButton.callback === 'function') {
+      if(this.closeButton && typeof this.closeButton.callback === 'function'){
         this.closeButton.callback()
         //调用用户传的回调
       }
@@ -81,51 +81,38 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$font-size: 14px;
-$toast-min-height: 40px;
-$toast-bg: rgba(0, 0, 0, 0.75);
-.toast {
-  font-size: $font-size;
-  min-height: $toast-min-height;
-  line-height: 1.8;
-  position: fixed;
-  color: #eeeeee;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  background: $toast-bg;
-  border-radius: 4px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50);
-  padding: 0 16px;
-}
-
-.message {
-  padding: 8px 0;
-}
-
-.close {
-  padding-left: 16px;
-  flex-shrink: 0
-}
-
-.line {
-  height: 100%;
-  border-left: 1px solid #666;
-  margin-left: 16px;
-
-  &.position-top {
-    top: 0;
-    transform: transLateX(-50%);
+  $font-size: 14px;
+  $toast-min-height: 40px;
+  $toast-bg: rgba(0, 0, 0, 0.75);
+  .toast {
+    font-size: $font-size; min-height: $toast-min-height; line-height: 1.8;
+    position: fixed; display: flex;
+    color: white; align-items: center; background: $toast-bg; border-radius: 4px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50); padding: 0 16px;
+    left: 50%;
+    .message {
+      padding: 8px 0;
+    }
+    .close {
+      padding-left: 16px;
+      flex-shrink: 0;
+    }
+    .line {
+      height: 100%;
+      border-left: 1px solid #666;
+      margin-left: 16px;
+    }
+    &.position-top{
+      top: 0;
+      transform: translateX(-50%);
+    }
+    &.position-bottom{
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+    &.position-middle{
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
-
-  &.position-bottom {
-    bottom: 0;
-    transform: transLateX(-50%);
-  }
-
-  &.position-middle {
-    top: 50%;
-    transform: transLate(-50%, -50%);
-  }
-}
 </style>

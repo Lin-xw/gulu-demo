@@ -16,7 +16,7 @@ export default {
 }
 
 /* helpers */
-function createToast(Vue, message, propsData) {//解析对象
+function createToast ({Vue, message, propsData}) {
   let Constructor = Vue.extend(Toast)
   let toast = new Constructor({propsData})
   toast.$slots.default = [message]

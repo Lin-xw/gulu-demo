@@ -37,13 +37,12 @@ new Vue({
     message: 'hi'
   },
   created() {//出生
-
   },
   methods: {
     showToast() {
-      this.$toast('你的账号需要充值', {
+      this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}。你的智商需要充值！`, {
         //改变弹出位置  上中下
-        position: 'bottom',
+        position: 'middle',
         enableHtml: false,
         //支持html启动开关
         closeButton: {
@@ -56,6 +55,5 @@ new Vue({
         autoCloseDelay: 10
       })
     }
-
   }
 })
