@@ -39,10 +39,20 @@ new Vue({
   created() {//出生
   },
   methods: {
-    showToast() {
+    //实现多个按键效果
+    showToast1(){
+      this.showToast('top')
+    },
+    showToast2(){
+      this.showToast('middle')
+    },
+    showToast3(){
+      this.showToast('bottom')
+    },
+    showToast(position) {
       this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}。你的智商需要充值！`, {
         //改变弹出位置  上中下
-        position: 'middle',
+        position,
         enableHtml: false,
         //支持html启动开关
         closeButton: {
