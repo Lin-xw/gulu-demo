@@ -1,5 +1,5 @@
 <template>
-  <div class="toast" ref="toast">
+  <div class="toast" ref="toast" :class="toastClasses">
     <div class="message">
       <slot v-if="!enableHtml"></slot>
       <div v-else v-html="$slots.default[0]"></div>
@@ -27,7 +27,7 @@ export default {
       type:Boolean,
       default:false
     },
-    position:{
+    position:{//实现弹窗位置 上中下
       type: String,
       default: 'top',
       validator(value){
@@ -39,6 +39,12 @@ export default {
   mounted() {
     this.updateStyles()
     this.execAutoClose()
+  },
+  //计算属性
+  computed:{
+    toastClasses(){
+      return {[`position-${this.position}`]: true}
+    }
   },
   methods: {
     //使用js方法实现竖线分割,解决css的高度问题
@@ -83,10 +89,8 @@ export default {
     min-height: $toast-min-height;
     line-height: 1.8;
     position: fixed;
-    top: 0;
     color: #eeeeee;
     left: 50%;
-    transform: transLateX(-50%);
     display: flex;
     align-items: center;
     background: $toast-bg;
@@ -98,5 +102,24 @@ export default {
     padding: 8px 0;
   }
   .close{padding-left: 16px; flex-shrink: 0}
-  .line{height: 100%;border-left: 1px solid #666;margin-left: 16px;}
+  .line {
+    height: 100%;
+    border-left: 1px solid #666;
+    margin-left: 16px;
+
+    &.position-top {
+      top: 0;
+      transform: transLateX(-50%);
+    }
+
+    &.position-bottom {
+      bottom: 0;
+      transform: transLateX(-50%);
+    }
+
+    &.position-middle {
+      top: 50%;
+      transform: transLate(-50%, -50%);
+    }
+  }
 </style>

@@ -37,15 +37,19 @@ new Vue({
         message: 'hi'
     },
     created() {
-        this.$toast('',{
+        this.$toast('你的账号需要充值',{
+            //改变弹出位置  上中下
+            position:'bottom',
             enableHtml: false,
             //支持html启动开关
             closeButton:{
                 text:'已充值',
                 callback(){
-
+                    console.log('他说已经充值账号了')
                 }
         },
+            autoClose:true,
+            autoCloseDelay: 10
         })
     },
     methods: {
