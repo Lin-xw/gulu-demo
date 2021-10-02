@@ -46,15 +46,15 @@ export default {
   },
   computed: {
     colClass() {
-      let {span, offset, ipad,narrowPc,pc,widePc} = this
+      let {span, offset, ipad, narrowPc, pc, widePc} = this
       let createClasses = this.createClasses
       return [
         ...createClasses({span,offset}),
         //如果有***就传col-{str}${obj.span}
         ...createClasses(ipad,'ipad-'),
-        ...createClasses(narrowPc,'narrowPc-'),
+        ...createClasses(narrowPc,'narrow-pc-'),
         ...createClasses(pc,'pc-'),
-        ...createClasses(widePc,'widePc-'),
+        ...createClasses(widePc,'wide-pc-'),
       ]
       //把传给js的东西体现在标签上面，方可用css切换
     },
@@ -72,21 +72,20 @@ export default {
   $class-prefix: col-;
   @for $n from 1 through 24 {
     &.#{$class-prefix}#{$n} {
-      width:($n / 24) * 100%;
+      width: ($n / 24) * 100%;
     }
   }
   $class-prefix: offset-;
   @for $n from 1 through 24 {
     &.#{$class-prefix}#{$n} {
-
+      margin-left: ($n / 24) * 100%;
     }
   }
-  //ipad屏幕
   @media (min-width: 577px) {
     $class-prefix: col-ipad-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
-        width: ($n / 24) *100%;
+        width: ($n / 24) * 100%;
       }
     }
     $class-prefix: offset-ipad-;
@@ -96,12 +95,11 @@ export default {
       }
     }
   }
-  //窄屏幕
-  @media (min-width: 769px) {
+  @media (min-width: 769px){ // 770
     $class-prefix: col-narrow-pc-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
-        width: ($n / 24) *100%;
+        width: ($n / 24) * 100%;
       }
     }
     $class-prefix: offset-narrow-pc-;
@@ -111,12 +109,11 @@ export default {
       }
     }
   }
-  //电脑屏幕
-  @media (min-width: 993px){
+  @media (min-width: 993px) {
     $class-prefix: col-pc-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
-        width: ($n / 24) *100%;
+        width: ($n / 24) * 100%;
       }
     }
     $class-prefix: offset-pc-;
@@ -126,12 +123,11 @@ export default {
       }
     }
   }
-  //宽屏电脑
-  @media (min-width: 1201px){
+  @media (min-width: 1201px) {
     $class-prefix: col-wide-pc-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
-        width: ($n / 24) *100%;
+        width: ($n / 24) * 100%;
       }
     }
     $class-prefix: offset-wide-pc-;

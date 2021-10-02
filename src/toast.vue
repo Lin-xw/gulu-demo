@@ -17,8 +17,13 @@
 export default {
   name: 'GuluToast',
   props: {//参数
-    autoClose: {type: Boolean, default: true},
-    autoCloseDelay: {type: Number, default: 5},
+    autoClose: {
+      type: [Boolean,Number],
+      default: 5,
+      validator(value){
+        return value === false || typeof value === 'number';
+      }
+    },
     closeButton: {
       type: Object,
       default: () => {
@@ -61,7 +66,7 @@ export default {
       if (this.autoClose) {
         setTimeout(() => {//5秒钟之后结束
           this.close()
-        }, this.autoCloseDelay * 1000)
+        }, this.autoClose * 1000)
       }
     },
     //实现关闭

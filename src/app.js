@@ -61,8 +61,7 @@ new Vue({
             console.log('他说已经充值账号了')
           }
         },
-        autoClose: true,
-        autoCloseDelay: 10
+        autoClose: 3,
       })
     }
   }
