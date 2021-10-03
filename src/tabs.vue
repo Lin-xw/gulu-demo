@@ -5,7 +5,6 @@
 </template>
 <script>
 import Vue from 'vue'
-
 export default {
   name: 'GuluTabs',
   props: {
@@ -34,11 +33,17 @@ export default {
       eventBus:this.eventBus
     }
   },
-  mounted() {//只有mounted能保证子元素已经全都创建好了
-    //通过this.eventBus就能访问到.eventBus
-    //必须触发update:selected事件才能使.sync修饰符有用
-    this.eventBus.$emit('update:selected',this.selected)
-    //用户选中了一个selected
+  mounted() {//找item
+    this.$children.forEach((vm) => {
+      if (vm.$options.name === 'GuluTabsHead') {
+        vm.$children.forEach((childVm) => {
+          if (childVm.$options.name === 'GuluTabsItem'
+              && childVm.name === this.selected) {
+            this.eventBus.$emit('update:selected', this.selected, childVm)
+          }
+        })
+      }
+    })
   }
 }
 </script>
