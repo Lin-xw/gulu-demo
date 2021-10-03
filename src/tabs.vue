@@ -9,11 +9,11 @@ import Vue from 'vue'
 export default {
   name: 'GuluTabs',
   props: {
-    selected: {
+    selected: {//双向同步
       type: String,
       required: true
     },
-    direction: {
+    direction: {//切换方向
       type: String,
       default:'horizontal',
       validator(value) {//验证方向

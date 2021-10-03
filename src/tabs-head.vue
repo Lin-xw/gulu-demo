@@ -12,11 +12,7 @@ export default {
   inject://注入
       ['eventBus'],
   created() {
-    //监听事件
-    //所有组件都需要监听selected事件
-    this.eventBus.$on('update:selected',(name)=>{
 
-    })
   }
 }
 </script>
@@ -27,7 +23,6 @@ export default {
     display: flex;
     height: $tab-height;
     justify-content: flex-start;
-    align-items: center;
     > .actions-wrapper{
       //把设置放右边
       margin-left: auto;

@@ -50,6 +50,10 @@ export default {
   .tabs-item{
     padding: 0 1em;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;//添加鼠标样式
+    height: 100%;
     &.active{
       background: red;
     }
