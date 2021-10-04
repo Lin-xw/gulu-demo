@@ -45,8 +45,9 @@ export default {
   methods: {//触发使用的方法
     //当用户点击了，就会说更新selected是this.name
     onClick() {
+      if(this.disabled){return}
       this.eventBus && this.eventBus.$emit('update:selected', this.name, this)
-
+      this.$emit('click',this)
     }
   }
 }
@@ -66,6 +67,9 @@ $disabled-text-color: grey;
     color: $blue;
     font-weight: bold;
   }
-
+  &.disabled{
+    color: $disabled-text-color;
+    cursor: not-allowed;
+  }
 }
 </style>
