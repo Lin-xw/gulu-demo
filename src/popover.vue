@@ -3,7 +3,7 @@
     <div ref="contentWrapper" class="content-wrapper" v-if="visible">
       <slot name="content"></slot>
     </div>
-    <span ref="triggerWrapper">
+    <span ref="triggerWrapper" style="display: inline-block">
       <slot></slot>
     </span>
   </div>
@@ -25,13 +25,16 @@ export default {
       this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
       this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
     },
-    onClickDocument (e) {
-        //监听点击事件
-        //如果包含了e.target，就什么都不做，否则执行关闭
-            if (this.$refs.popover &&
-                (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
-            ) { return }
-            this.close()
+    onClickDocument(e) {
+      //监听点击事件
+      //如果包含了e.target，就什么都不做，否则执行关闭
+      if (this.$refs.popover &&
+          (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
+      ) {return}
+      if (this.$refs.popover &&
+          (this.$refs.popover === e.target || this.$refs.contentWrapper.contains(e.target))
+      ) {return}
+      this.close()
     },
     open() {
       //弹出内容重新定位，监听Document
@@ -62,6 +65,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$border-radius: 4px;
+$border-color: #333;
 .popover {
   display: inline-block;
   vertical-align: top;
@@ -70,7 +75,32 @@ export default {
 
 .content-wrapper {
   position: absolute;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  padding: .5em 1em;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  background: white;
   transform: translateY(-100%);
+  border-color: $border-color;
+  border-radius: $border-radius;
+  margin-top: -10px;
+  max-width: 20em;
+  word-break: break-all;
+
+  &::before, &::after{
+    content: '';
+    display: block;
+    border: 10px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+  }
+
+  &::before{;
+    top: 100%;
+  }
+  &::after {
+    border-top-color: white;
+    top: calc(100% - 1px);
+  }
 }
 </style>
