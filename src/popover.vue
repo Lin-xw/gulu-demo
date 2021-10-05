@@ -1,5 +1,5 @@
 <template>
-  <div class="popover" @click="onClick" ref="popover">
+  <div class="popover" ref="popover">
     <div ref="contentWrapper" class="content-wrapper" v-if="visible"
     :class="{[`position-${position}`]:true}">
       <slot name="content"></slot>
@@ -16,12 +16,45 @@ export default {
     //默认看不见
     return {visible: false}
   },
+  mounted() {
+    //支持click和hover两种方式
+    if (this.trigger === 'click'){
+      this.$refs.popover.addEventListener('click',this.onClick)
+    }else {
+      this.$refs.popover.addEventListener('mouseenter',this.open)
+      this.$refs.popover.addEventListener('mouseleave',this.close)
+    }
+  },
+  computed:{
+    //支持click和hover两种方式
+    openEvent(){
+      if (this.trigger === 'click'){
+        return 'click'
+      } else {
+        return 'mouseenter'
+      }
+    },
+    closeEvent(){
+      if (this.trigger === 'click'){
+        return 'click'
+      } else {
+        return 'mouseleave'
+      }
+    }
+},
   props: {
     position: {//添加气泡四个方向选择
       type: String,
       default: 'top',
       validator(value) {
         return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
+      }
+    },
+    trigger:{//触发click hover
+      type:String,
+      default:'click',
+      validator(value) {
+        return ['click', 'hover'].indexOf(value)>= 0;
       }
     }
   },
