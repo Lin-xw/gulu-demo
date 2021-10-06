@@ -1,34 +1,38 @@
 <template>
   <div class="collapse">
-  <slot></slot>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+
 export default {
-  name:'GuluCollapse',
-  props:{
-    single:{
+  name: 'GuluCollapse',
+  props: {
+    single: {
       type: Boolean,
-      default:false
+      default: false
     },
-    selected:{
-      type:String,
+    selected: {
+      type: String,
     }
   },
-  data(){
-    return{
-      eventBus:new Vue()
+  data() {
+    return {
+      eventBus: new Vue()
     }
   },
-  provide(){//提供
-      return{
-        eventBus:this.eventBus
-      }
+  provide() {//提供
+    return {
+      eventBus: this.eventBus
+    }
   },
   mounted() {
-    this.eventBus.$emit('update:selected',this.selected)
+    this.eventBus.$emit('update:selected', this.selected)
+    this.eventBus.$on('update:selected', (name) => {
+      this.$emit('update:selected', name)
+    })
   }
 }
 </script>
@@ -36,7 +40,7 @@ export default {
 <style lang="scss" scoped>
 $grey: #ddd;
 $border-radius: 4px;
-.collapse{
+.collapse {
   border: 1px solid $grey;
   border-radius: $border-radius;
 }
