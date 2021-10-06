@@ -16,6 +16,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    name:{
+      type: String,
+      required: true
     }
   },
   data() {
@@ -28,9 +32,11 @@ export default {
     //监听
     //看被选中的vm是不是自己，是自己就发出来
     //如果有 this.eventBus && 在监听
-    this.eventBus && this.eventBus.$on('update:selected',(vm)=>{
-      if(vm !== this){
+    this.eventBus && this.eventBus.$on('update:selected',(name)=>{
+      if(name !== this.name){
         this.close()
+      }else{
+        this.show()
       }
     })
   },
@@ -39,14 +45,16 @@ export default {
       if (this.open) {
         this.open = false
       } else {
-        this.open = true
         //触发事件，被选中哪个就哪个this传进去
-        this.eventBus && this.eventBus.$emit('update:selected', this)
+        this.eventBus && this.eventBus.$emit('update:selected', this.name)
       }
     },
 
     close(){
       this.open = false
+    },
+    show(){
+      this.open = true
     }
   },
 }
