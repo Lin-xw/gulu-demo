@@ -12,6 +12,22 @@
 <script>
 export default {
   name: "GuluPopover",
+  props: {
+    position: {//添加气泡四个方向选择
+      type: String,
+      default: 'top',
+      validator(value) {
+        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
+      }
+    },
+    trigger:{//触发click hover
+      type:String,
+      default:'click',
+      validator(value) {
+        return ['click', 'hover'].indexOf(value)>= 0;
+      }
+    },
+  },
   data() {
     //默认看不见
     return {visible: false}
@@ -42,22 +58,7 @@ export default {
       }
     }
 },
-  props: {
-    position: {//添加气泡四个方向选择
-      type: String,
-      default: 'top',
-      validator(value) {
-        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
-      }
-    },
-    trigger:{//触发click hover
-      type:String,
-      default:'click',
-      validator(value) {
-        return ['click', 'hover'].indexOf(value)>= 0;
-      }
-    }
-  },
+
   methods: {
     positionContent() {
       const {contentWrapper, triggerWrapper} = this.$refs
@@ -161,6 +162,7 @@ $border-radius: 4px;
       top: 100%;
     }
     &::after {
+      border-bottom: none;
       border-top-color: white;
       top: calc(100% - 1px);
     }
@@ -175,6 +177,7 @@ $border-radius: 4px;
       bottom: 100%;
     }
     &::after {
+      border-top: none;
       border-bottom-color: white;
       bottom: calc(100% - 1px);
     }
@@ -187,6 +190,7 @@ $border-radius: 4px;
       top: 50%;
     }
     &::before {
+      border-right: none;
       border-left-color: black;
       left: 100%;
     }
@@ -203,6 +207,7 @@ $border-radius: 4px;
     }
     &::before {
       border-right-color: black;
+      border-left: none;
       right: 100%;
     }
     &::after {
