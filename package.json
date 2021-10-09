@@ -28,7 +28,7 @@
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
-    "vue-server-renderer": "2.5.16",
+    "vue-server-renderer": "2.6.14",
     "vue-router": "^3.0.1",
     "@vue/component-compiler-utils": "^2.0.0",
     "chai": "^4.1.2",
