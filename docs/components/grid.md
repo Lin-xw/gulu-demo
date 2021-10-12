@@ -1,4 +1,8 @@
 ---
-title: Grid - 网格
+title: Grid - 栅格
 ---
-# 网格
+# 栅格
+
+<ClientOnly>
+<grid-demos></grid-demos>
+</ClientOnly>

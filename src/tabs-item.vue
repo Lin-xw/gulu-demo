@@ -53,7 +53,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$blue: blue;
+$blue: #3eaf7c;
 $disabled-text-color: grey;
 .tabs-item {
   padding: 0 1em;

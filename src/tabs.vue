@@ -9,7 +9,7 @@ export default {
   name: 'GuluTabs',
   props: {
     selected: {//双向同步
-      type: String,
+      type: String|Array,
       required: true
     },
     direction: {//切换方向

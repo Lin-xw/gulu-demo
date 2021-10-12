@@ -59,13 +59,13 @@ new Vue({
       console.log('yyy')
       console.log(data)
     },
-    showToast1(){
+    showToastTop(){
       this.showToast('top')
     },
-    showToast2(){
+    showToastMiddle(){
       this.showToast('middle')
     },
-    showToast3(){
+    showToastBottom(){
       this.showToast('bottom')
     },
     showToast(position){

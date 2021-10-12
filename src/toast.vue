@@ -35,7 +35,7 @@ export default {
       default: false
     },
     position: {//实现弹窗位置 上中下
-      type: String,
+      type: String|Number,
       default: 'top',
       validator(value) {
         return ['top', 'bottom', 'middle'].indexOf(value) >= 0
@@ -64,7 +64,7 @@ export default {
     //默认true，自动关闭
     execAutoClose() {
       if (this.autoClose) {
-        setTimeout(() => {//5秒钟之后结束
+        setTimeout(() => {//m秒钟之后结束
           this.close()
         }, this.autoClose * 1000)
       }
