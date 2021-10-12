@@ -5,7 +5,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: '主页', link: '/' },
-      { text: '文档', link: '/guide/' },
+      { text: '文档', link: '/install/' },
       { text: 'GitHub', link: 'https://github.com/Lin-xw/gulu-demo' },
     ],
     sidebar: [
