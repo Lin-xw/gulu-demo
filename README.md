@@ -32,14 +32,34 @@
   ```
 3.引入 gulu
   ```
-  import {Button, ButtonGroup, Icon} from 'frank-test-1-1'
+  import {Button, ButtonGroup, Icon,Col, Collapse, CollapseItem, Content, Footer, Header, Input, Layout, Popover
+       , Row, Sider, Tabs, TabsHead, TabsBody, TabsItem, TabsPane, Toast,plugin
+       } from from 'frank-test-1-1'
   import 'frank-test-1-1/dist/index.css'
-
+  import Vue from 'vue'
   export default {
     name: 'app',
     components: {
       'g-button': Button,
-      'g-icon': Icon
+      'g-icon': Icon，
+      'g-button-group':ButtonGroup,
+      'g-col':Col,
+      'g-collapse':Collapse,
+      'g-collapse-item':CollapseItem,
+      'g-content': Content,
+      'g-footer': Footer,
+      'g-header': Header,
+      'g-input': Input,
+      'g-layout': Layout,
+      'g-popover': Popover,
+      'g-row': Row,
+      'g-sider': Sider,
+      'g-tabs': Tabs,
+      'g-tabs-head': TabsHead,
+      'g-tabs-body': TabsBody,
+      'g-tabs-item': TabsItem,
+      'g-tabs-pane': TabsPane,
+      'g-toast': Toast,
     }
   }
   ```
