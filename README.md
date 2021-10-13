@@ -2,11 +2,11 @@
 
 [![Build Status](https://app.travis-ci.com/Lin-xw/gulu-demo.svg?branch=master)](https://app.travis-ci.com/Lin-xw/gulu-demo)
 
-##介绍
+## 介绍
 
 这是我在学习 Vue 过程中做的一个 UI 框架，希望对你有用
 
-##开始使用
+## 开始使用
 1.添加 css 样式
   使用本框架前，请在css中开启 border-box
   ```
@@ -63,12 +63,12 @@
     }
   }
   ```
-##文档
+## 文档
 
-##提问
+## 提问
 
-##变更记录
+## 变更记录
 
-##联系方式
+## 联系方式
 
-##贡献代码
+## 贡献代码
