@@ -50,35 +50,47 @@ const h = createElement
 new Vue({
   el: '#app',
   data: {
-    selectedTab: ['1','2','3']
+    selectedTab: ['2','1'],
+    xxx: 'sports'
   },
-  created(){
-  },
+  created() {},
+  position: 'bottom',
   methods: {
-    yyy(data){
+    yyy() {
       console.log('yyy')
-      console.log(data)
     },
-    showToastTop(){
-      this.showToast('top')
-    },
-    showToastMiddle(){
-      this.showToast('middle')
-    },
-    showToastBottom(){
-      this.showToast('bottom')
-    },
-    showToast(position){
-      this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}。你的智商需要充值！`, {
-        position,
-        enableHtml: false,
+    auto() {
+      this.$toast('我是 toast 内容', {
+        zIndex:30,
+        autoClose: 5,
         closeButton: {
-          text: '已充值',
-          callback () {
-            console.log('他说已经充值智商了')
+          text:'确定',
+          callback:()=>{
+            console.log('回调的输出')
           }
         },
-        autoClose: 3,
+        enableHTML:true
+      })
+    },
+    top(){
+      this.$toast('我是 toast 内容', { position: 'top' })
+    },
+    middle(){
+      this.$toast('我是 toast 内容', { position: 'middle' })
+    },
+    bottom(){
+      this.$toast('我是 toast 内容', { position: 'bottom' })
+    },
+    showToast(position) {
+      this.$toast(`message${parseInt(Math.random() * 100)}`, {
+        enableHtml: false,
+        position: position,
+        closeButton: {
+          text: '充值',
+          callback: () => {
+            console.log('充值成功')
+          }
+        },
       })
     }
   }

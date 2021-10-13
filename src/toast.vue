@@ -1,14 +1,14 @@
 <template>
-  <div class="wrapper" :class="toastClasses">
-    <div class="toast" ref="toast" >
+  <div class="gulu-toast" :class="toastClasses">
+    <div class="toast" ref="toast">
       <div class="message">
         <slot v-if="!enableHtml"></slot>
         <div v-else v-html="$slots.default[0]"></div>
       </div>
       <div class="line" ref="line"></div>
       <span class="close" v-if="closeButton" @click="onClickClose">
-      {{ closeButton.text }}
-    </span>
+        {{closeButton.text}}
+      </span>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       validator(value) {
         return ['top', 'bottom', 'middle'].indexOf(value) >= 0
       }
-    }
+    },
   },
   //使用
   mounted() {
@@ -69,14 +69,10 @@ export default {
         }, this.autoClose * 1000)
       }
     },
-    //实现关闭
-    close() {
-      //把元素从body里拿出来
+    close () {
       this.$el.remove()
       this.$emit('close')
       this.$destroy()
-      //会把绑定的事件取消掉
-
     },
     onClickClose() {//如果用户点击关闭
       this.close()//把自己先关闭
@@ -94,77 +90,62 @@ $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
 @keyframes slide-up {
-  //添加动画
-  0% {opacity: 0;transform: translateY(100%)}
-  100% {opacity: 1;transform: translateY(0%)}
+  0% {opacity: 0; transform: translateY(100%);}
+  100% {opacity: 1;transform: translateY(0%);}
 }
 @keyframes slide-down {
-  //添加动画
-  0% {opacity: 0;transform: translateY(-100%)}
-  100% {opacity: 1;transform: translateY(0%)}
+  0% {opacity: 0; transform: translateY(-100%);}
+  100% {opacity: 1;transform: translateY(0%);}
 }
 @keyframes fade-in {
-  //添加动画
-  0% {opacity: 0;}
+  0% {opacity: 0; }
   100% {opacity: 1;}
 }
-.wrapper{
+.gulu-toast {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
   $animation-duration: 300ms;
   &.position-top {
     top: 0;
-    .toast{
-      border-top-right-radius: 0;
+    .toast {
       border-top-left-radius: 0;
+      border-top-right-radius: 0;
       animation: slide-down $animation-duration;
     }
   }
   &.position-bottom {
     bottom: 0;
-    .toast{
-      border-bottom-right-radius: 0;
+    .toast {
       border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
       animation: slide-up $animation-duration;
     }
   }
   &.position-middle {
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
-    .toast{
+    .toast {
       animation: fade-in $animation-duration;
     }
   }
 }
 .toast {
-  font-size: $font-size;
-  min-height: $toast-min-height;
-  line-height: 1.8;
-
+  font-size: $font-size; min-height: $toast-min-height; line-height: 1.8;
   display: flex;
-  color: white;
-  align-items: center;
-  background: $toast-bg;
-  border-radius: 4px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50);
-  padding: 0 16px;
-
-
+  color: white; align-items: center; background: $toast-bg; border-radius: 4px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.50); padding: 0 16px;
   .message {
     padding: 8px 0;
   }
-
   .close {
     padding-left: 16px;
     flex-shrink: 0;
   }
-
   .line {
     height: 100%;
     border-left: 1px solid #666;
     margin-left: 16px;
   }
-
 }
 </style>
